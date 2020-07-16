@@ -1,0 +1,16 @@
+{
+    "name": "m_n_75/7todo",
+    "description": "A Simple Todo List Project (with Ajax, Php and Mysql)",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "meysam",
+            "email": "meysamna514@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "hekmatinasser/verta": "^1.10"
+    }
+}
