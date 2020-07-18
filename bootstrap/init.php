@@ -2,8 +2,6 @@
 include "constants.php";
 include "config.php";
 include "libs/helpers.php";
-include "libs/lib-auth.php";
-include "libs/lib-tasks.php";
 include "vendor/autoload.php";
 
 
@@ -16,3 +14,7 @@ try {
 } catch (PDOException $e) {
     diePage('Connection failed: ' . $e->getMessage());
 }
+
+
+include "libs/lib-auth.php";
+include "libs/lib-tasks.php";
