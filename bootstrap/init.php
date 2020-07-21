@@ -1,8 +1,8 @@
 <?php
 include "constants.php";
-include "config.php";
-include "libs/helpers.php";
-include "vendor/autoload.php";
+include BASE_PATH . "bootstrap/config.php";
+include BASE_PATH . "libs/helpers.php";
+include BASE_PATH . "vendor/autoload.php";
 
 
 $dsn = "mysql:dbname=$database_config->db;host=$database_config->host";
@@ -16,5 +16,5 @@ try {
 }
 
 
-include "libs/lib-auth.php";
-include "libs/lib-tasks.php";
+include BASE_PATH . "libs/lib-auth.php";
+include BASE_PATH . "libs/lib-tasks.php";
