@@ -23,6 +23,10 @@ input {
   border: 1px solid #ccc;
 }
 
+.created-at{
+  font-size: 11px;
+  margin-right: 11px;
+}
 
 .page {
   position: absolute;
@@ -154,6 +158,31 @@ input {
 .main .nav .menu ul li i {
   font-size: 1.4em;
   margin-right: 10px;
+}
+.main .nav .menu ul li a{
+  text-decoration: none;
+  color: #0c7388;
+}
+.main .nav .menu ul li a.remove{
+  color: red;
+  float: right;
+}
+.main .nav .menu ul li.active a.remove{
+  color: red;
+  float: right;
+}
+.main .nav .menu ul li a.remove:hover{
+  color: #4F4F4F;
+}
+.main .nav .menu ul li.active a{
+  color: #79bc46;
+}
+a.remove{
+  color: red;
+  float: right;
+}
+a.remove:hover{
+  color: #4F4F4F;
 }
 .main .view {
   position: relative;

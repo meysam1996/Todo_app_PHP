@@ -4,19 +4,7 @@
   <meta charset="UTF-8">
   <title><?= SITE_TITLE ?></title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .main .nav .menu ul li a{
-      text-decoration: none;
-      color: #0c7388;
-    }
-    .main .nav .menu ul li a.remove{
-      color: red;
-      float: right;
-    }
-    .main .nav .menu ul li a.remove:hover{
-      color: #4F4F4F;
-    }
-  </style>
+  
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -35,16 +23,17 @@
       <div class="menu">
         <div class="title">Folders</div>
         <ul class="folder-list">
+
+        <li class="<?= isset($_GET['folder_id']) ? '' : 'active' ?>"><i class="fa fa-folder"></i>All</li>
           <?php foreach ($folders as $folder) : ?>
 
-          <li>
+          <li class="<?= $_GET['folder_id'] == $folder->id ? 'active' : '' ?>">
           <a href="?folder_id=<?= $folder->id ?>"><i class="fa fa-folder"></i><?= $folder->name ?></a>
-          <a href="?delete_folder=<?= $folder->id ?>" class="remove"><i class="fa fa-trash-o"></i></a>
+          <a href="?delete_folder=<?= $folder->id ?>" class="remove" onclick="return confirm('Are you sure to delete this <?= $folder->name ?>?');"><i class="fa fa-trash-o"></i></a>
           </li>
           
           <?php endforeach; ?>
 
-          <li class="active"><i class="fa fa-folder"></i>Folder</li>
         </ul>
       </div>
         <div>
@@ -54,7 +43,9 @@
     </div>
     <div class="view">
       <div class="viewHeader">
-        <div class="title">Manage Tasks</div>
+        <div class="title" style="width: 50%;">
+          <input type="text" id="taskNameInput" placeholder="Add new Task" style="width: 100%;margin-left: 3%;line-height: 30px;"/>
+        </div>
         <div class="functions">
           <div class="button active">Add New Task</div>
           <div class="button">Completed</div>
@@ -65,27 +56,20 @@
         <div class="list">
           <div class="title">Today</div>
           <ul>
-            <li class="checked"><i class="fa fa-check-square-o"></i><span>Update team page</span>
+
+          <?php if(sizeof($tasks)) : ?>
+            <?php foreach ($tasks as $task) : ?>
+            <li class="<?= $task->is_done ? 'checked' : '' ?>"><i class="<?= $task->is_done ? 'fa fa-check-square-o' : 'fa fa-square-o' ?>"></i><span><?= $task->title ?></span>
               <div class="info">
-                <div class="button green">In progress</div><span>Complete by 25/04/2014</span>
+                <span class="created-at">Created at <?= $task->created_at ?></span>
+                <a href="?delete_task=<?= $task->id ?>" class="remove" onclick="return confirm('Are you sure to delete this Item?');"><i class="fa fa-trash-o"></i></a>
               </div>
             </li>
-            <li><i class="fa fa-square-o"></i><span>Design a new logo</span>
-              <div class="info">
-                <div class="button">Pending</div><span>Complete by 10/04/2014</span>
-              </div>
-            </li>
-            <li><i class="fa fa-square-o"></i><span>Find a front end developer</span>
-              <div class="info"></div>
-            </li>
-          </ul>
-        </div>
-        <div class="list">
-          <div class="title">Tomorrow</div>
-          <ul>
-            <li><i class="fa fa-square-o"></i><span>Find front end developer</span>
-              <div class="info"></div>
-            </li>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <li>No Task Here...</li>
+          <?php endif; ?>
+
           </ul>
         </div>
       </div>

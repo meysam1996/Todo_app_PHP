@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASE_PATH') OR die("Permision Denied!");
 
 /*** Folder Functions ***/
 function deleteFolder($folder_id){
@@ -30,8 +30,12 @@ function getFolders(){
 }
 
 /*** Tasks Functions ***/
-function removeTasks(){
-    return 1;
+function removeTasks($task_id){
+    global $pdo;
+    $sql = "delete from tasks where id = $task_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->rowCount();
 }
 
 function addTasks(){
@@ -39,5 +43,17 @@ function addTasks(){
 }
 
 function getTasks(){
-    return 1;
+    global $pdo;
+    $folder = $_GET['folder_id'] ?? null;
+    $folderCondition = '';
+    if(isset($folder) && is_numeric($folder)){
+        $folderCondition = "and folder_id = $folder";
+    }
+    $currentUserid = getCurrentUserId();
+    $sql = "select * from tasks where user_id = $currentUserid $folderCondition";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $record = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    return $record;
 }
