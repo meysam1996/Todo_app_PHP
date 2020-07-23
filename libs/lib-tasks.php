@@ -38,8 +38,13 @@ function removeTasks($task_id){
     return $stmt->rowCount();
 }
 
-function addTasks(){
-    return 1;
+function addTask($taskTitle,$folderId){
+    global $pdo;
+    $currentUserid = getCurrentUserId();
+    $sql = "insert into tasks (title,user_id,folder_id) values (:taskTitle,:user_id,:folder_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':taskTitle'=>$taskTitle,':user_id'=>$currentUserid,':folder_id'=>$folderId]);
+    return $stmt->rowCount();
 }
 
 function getTasks(){
