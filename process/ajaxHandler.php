@@ -29,6 +29,14 @@ switch($_POST['action']){
         }
         echo addTask($taskTitle,$folderId);
     break;
+    case 'doneSwitch':
+        $task_id = $_POST['taskId'];
+        if(!isset($task_id) || !is_numeric($task_id)){
+            echo "Task ID is invalid!";
+            die();
+        }
+        doneSwitch($task_id);
+    break;
     default :
     diePage("Invalid Action!!");
 }

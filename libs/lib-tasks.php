@@ -30,7 +30,7 @@ function getFolders(){
 }
 
 /*** Tasks Functions ***/
-function removeTasks($task_id){
+function removeTask($task_id){
     global $pdo;
     $sql = "delete from tasks where id = $task_id";
     $stmt = $pdo->prepare($sql);
@@ -61,4 +61,23 @@ function getTasks(){
     $record = $stmt->fetchAll(PDO::FETCH_OBJ);
 
     return $record;
+}
+
+/*** Delete Folder with the Task in that Folder ***/
+function removeTasks($folder_id){
+    global $pdo;
+    $sql = "delete from tasks where folder_id = $folder_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
+/*** Done Switch CheckBox ***/
+function doneSwitch($task_id){
+    global $pdo;
+    $currentUserid = getCurrentUserId();
+    $sql = "update tasks set is_done = 1 - is_done where user_id = :userId  and id = :taskId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':userId'=>$currentUserid,':taskId'=>$task_id]);
+    return $stmt->rowCount();
 }
