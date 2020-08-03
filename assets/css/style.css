@@ -136,6 +136,11 @@ input {
 .main .nav .menu ul {
   padding-left: 0px;
 }
+.success {
+  background: #def9df !important;
+  border: 1px solid #a4cca6 !important;
+  color: #205217 !important;
+}
 .main .nav .menu ul li {
   cursor: pointer;
   list-style: none;
