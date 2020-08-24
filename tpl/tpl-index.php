@@ -54,7 +54,7 @@
         </div>
         <div class="functions">
           <div class="button active">Add New Task</div>
-          <div class="button">Completed</div>
+          <a href="?orderby=<?= Last_first ?>"><div class="button">Last-first</div></a>
         </div>
       </div>
       <div class="content">

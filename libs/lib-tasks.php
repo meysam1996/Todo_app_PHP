@@ -55,7 +55,11 @@ function getTasks(){
         $folderCondition = "and folder_id = $folder";
     }
     $currentUserid = getCurrentUserId();
-    $sql = "select * from tasks where user_id = $currentUserid $folderCondition";
+    $order = $_GET['orderby'] ?? 'ASC';
+    if(isset($order)){
+        $orderBy = "order by created_at $order";
+    }
+    $sql = "select * from tasks where user_id = $currentUserid $folderCondition $orderBy";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $record = $stmt->fetchAll(PDO::FETCH_OBJ);
