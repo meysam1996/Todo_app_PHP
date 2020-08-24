@@ -53,12 +53,12 @@
           <input type="text" id="taskNameInput" placeholder="Add new Task" style="width: 100%;margin-left: 3%;line-height: 30px;"/>
         </div>
         <div class="functions">
-          <div class="button active">Add New Task</div>
-          <?php
-            $new_url = addOrUpdateUrlParam("orderby", Last_first);
-          ?>
-          <a href="<?= $new_url ?>"><div class="button">Last-first</div></a>
+
+          <a href="<?= addOrUpdateUrlParam("orderby", null) ?>"><div class="button <?= $_GET['orderby'] == null ? 'active' : '' ?>">Ascending</div></a>
+          
+          <a href="<?= addOrUpdateUrlParam("orderby", Last_first) ?>"><div class="button <?= $_GET['orderby'] == Last_first ? 'active' : '' ?>">Last-first</div></a>
         </div>
+        
       </div>
       <div class="content">
         <div class="list">
