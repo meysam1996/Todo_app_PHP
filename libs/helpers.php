@@ -34,3 +34,12 @@ function dd($var){
     var_dump($var);
     echo "</pre>";
 }
+
+function addOrUpdateUrlParam($name, $value)
+{
+    $params = $_GET;
+    unset($params[$name]);
+    $params[$name] = $value;
+    $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
+    return $current_url .'?'.http_build_query($params);
+}

@@ -34,7 +34,7 @@
           <?php foreach ($folders as $folder) : ?>
 
           <li class="<?= $_GET['folder_id'] == $folder->id ? 'active' : '' ?>">
-          <a href="<?= site_url("?folder_id=$folder->id") ?>"><i class="fa fa-folder"></i><?= $folder->name ?></a>
+          <a href="<?= addOrUpdateUrlParam("folder_id", $folder->id) ?>"><i class="fa fa-folder"></i><?= $folder->name ?></a>
           <a href="?delete_folder=<?= $folder->id ?>" class="remove" onclick="return confirm('Are you sure to delete this <?= $folder->name ?>?');"><i class="fa fa-trash-o"></i></a>
           </li>
           
@@ -54,7 +54,10 @@
         </div>
         <div class="functions">
           <div class="button active">Add New Task</div>
-          <a href="?orderby=<?= Last_first ?>"><div class="button">Last-first</div></a>
+          <?php
+            $new_url = addOrUpdateUrlParam("orderby", Last_first);
+          ?>
+          <a href="<?= $new_url ?>"><div class="button">Last-first</div></a>
         </div>
       </div>
       <div class="content">
