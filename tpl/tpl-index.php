@@ -21,8 +21,9 @@
       <div class="searchbox">
         <div>
           <i class="fa fa-search"></i>
-          <input type="search" placeholder="Search"/>
+          <input id="search_text" type="text" name="search_text" placeholder="Search"/>
         </div>
+        <div id="result"></div>
       </div>
       <div class="menu">
         <div class="title">Folders</div>
@@ -92,6 +93,7 @@
   <script>
     $(document).ready(function(){
 
+/**** Ajax isDone for Tasks ****/
       $('.isDone').click(function(e){
         var tid = $(this).attr('data-taskId');
         $.ajax({
@@ -104,9 +106,7 @@
         });
       });
 
-
-
-
+/**** Ajax create folder ****/
       $('#newFolderBtn').click(function(e){
         var input = $('input#newFolderInput').val();
         $.ajax({
@@ -122,6 +122,8 @@
           }
         });
       });
+
+/**** Ajax create Tasks ****/
       $('#taskNameInput').on('keypress',function(e){
         e.stopPropagation();
         if(e.which == 13){
@@ -137,6 +139,23 @@
             }
           }
           });
+        }
+      });
+
+      $('#search_text').keyup(function(){
+        var txt = $(this).val();
+        if (txt != '') {
+          $.ajax({
+            url : "process/ajaxHandler.php",
+            method : "post",
+            data : {action : "search",search : txt},
+            dataType : "text",
+            success : function(date){
+              $('#result').html(data);
+            }
+          });
+        }else{
+          $('#result').html('');
         }
       });
 

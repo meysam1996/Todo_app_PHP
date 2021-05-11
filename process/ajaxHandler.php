@@ -37,6 +37,9 @@ switch($_POST['action']){
         }
         doneSwitch($task_id);
     break;
+    case 'search':
+        $search_txt = $_POST['search'];
+        echo searchTasks($search_txt);
     default :
     diePage("Invalid Action!!");
 }

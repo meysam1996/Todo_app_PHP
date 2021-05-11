@@ -85,3 +85,14 @@ function doneSwitch($task_id){
     $stmt->execute([':userId'=>$currentUserid,':taskId'=>$task_id]);
     return $stmt->rowCount();
 }
+
+/*** Search Box ***/
+function searchTasks($search_txt){
+    global $pdo;
+    $currentUserid = getCurrentUserId();
+    $sql = "select * from tasks where user_id = $currentUserid and title like '%$search_txt%'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $records = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $records;
+}
